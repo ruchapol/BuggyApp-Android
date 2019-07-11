@@ -24,6 +24,7 @@
         </activity>
 
         <activity android:name=".activity.SongInfoActivity" />
+        <activity android:name=".activity.ProfileNextActivity" />
 
     </application>
 

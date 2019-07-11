@@ -10,7 +10,8 @@
               android:layout_height="wrap_content"
               android:text="Please Enter Your Name (Nickname)"/>
 
-    <EditText android:layout_width="300dp"
+    <EditText android:id="@+id/inputName"
+              android:layout_width="300dp"
               android:layout_height="wrap_content"
               android:hint="John Sick (John)"
               android:gravity="center_horizontal"
