@@ -14,6 +14,8 @@
               android:layout_height="wrap_content"
               android:hint="John Sick (John)"
               android:gravity="center_horizontal"
-        ></EditText>
+              android:singleLine="true"
+              android:imeOptions="actionDone"
+    ></EditText>
 
 </LinearLayout>
