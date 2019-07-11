@@ -3,6 +3,7 @@ package scb.academy.jinglebell.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,8 +21,12 @@ class SongInfoActivity : AppCompatActivity() {
         private const val DATE_FORMAT_ISO_8601 = "YYYY-MM-dd'T'HH:mm:ss'Z'"
         private const val DATE_FORMAT_DATE_ONLY = "YYYY-MM-dd"
 
-        fun startActivity(context: Context, song: Song? = null) =
-            context.startActivity(Intent(context, SongInfoActivity::class.java))
+
+
+        fun startActivity(context: Context, song: Song? = null, intent: Intent) =
+
+//            context.startActivity(Intent(context, SongInfoActivity::class.java))
+            context.startActivity(intent)
     }
 
     private lateinit var ivSongArtWork: ImageView
@@ -46,6 +51,9 @@ class SongInfoActivity : AppCompatActivity() {
 
         val song = intent.getParcelableExtra<Song>(EXTRA_SONG) ?: return
         showSongInformation(song)
+
+
+        Log.d("crossPage", intent.getParcelableExtra<Song>(EXTRA_SONG)?.toString())
     }
 
     private fun showSongInformation(song: Song) {

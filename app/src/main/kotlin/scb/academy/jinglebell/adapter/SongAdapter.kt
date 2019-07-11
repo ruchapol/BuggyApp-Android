@@ -1,5 +1,8 @@
 package scb.academy.jinglebell.adapter
 
+
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -7,10 +10,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import scb.academy.jinglebell.R
+import scb.academy.jinglebell.activity.SongInfoActivity
 import scb.academy.jinglebell.extension.setImageUrl
 import scb.academy.jinglebell.vo.Song
+import android.content.Intent
+import androidx.core.content.ContextCompat.startActivity
+import scb.academy.jinglebell.activity.MainActivity
+
 
 class SongAdapter(
+    var context: Context,
     private var _songs: List<Song> = listOf(),
     private val onClick: (Song) -> Unit = {}
 ) : RecyclerView.Adapter<SongItemViewHolder>() {
@@ -22,7 +31,9 @@ class SongAdapter(
     val songs: List<Song>
         get() = _songs
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SongItemViewHolder(parent)
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SongItemViewHolder(context, parent)
 
     override fun onBindViewHolder(holder: SongItemViewHolder, position: Int) {
 //        holder.bind(_songs[position], onClick)
@@ -37,6 +48,8 @@ class SongAdapter(
         }
     }
 
+
+
     fun submitList(list: List<Song>) {
         _songs = list
 
@@ -44,9 +57,11 @@ class SongAdapter(
         notifyDataSetChanged()
     }
 
+
+
 }
 
-class SongItemViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+class SongItemViewHolder(var context: Context, var parent: ViewGroup) : RecyclerView.ViewHolder(
     LayoutInflater.from(parent.context).inflate(R.layout.item_song, parent, false)
 ) {
 
@@ -59,9 +74,31 @@ class SongItemViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         tvSongName.text = song.name
         tvSongArtist.text = song.artistName
         tvSongPrice.text = "${song.price} ${song.priceCurrency}"
+
         ivSongArtwork.setImageUrl(song.artworkUrl)
 
-        itemView.setOnClickListener { onClick(song) }
+        itemView.setOnClickListener {
+            Log.d("crossPage", song.toString())
+
+
+//            onClick(song)
+            val intentToSongDetail = Intent(context, SongInfoActivity::class.java)
+            intentToSongDetail.putExtra("song", song)
+
+            SongInfoActivity.startActivity(context, song, intentToSongDetail)
+
+//            context.startActivity(intentToSongDetail)
+
+//            startActivity(context, intentToSongDetail, null)
+////            val inflatedView = parent
+//            val inflatedView = inflate(R.layout.activity_song_info, false)
+//            return SongItemViewHolder(inflatedView)
+
+        }
+
     }
+
+
+
 
 }
