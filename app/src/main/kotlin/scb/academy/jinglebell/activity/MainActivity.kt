@@ -51,7 +51,8 @@ class MainActivity : AppCompatActivity() {
                 SongListFragment()
             }
 
-            R.id.action_profile -> { Fragment() }
+            R.id.action_profile -> { Fragment()
+                }
 
             else -> return
         }
