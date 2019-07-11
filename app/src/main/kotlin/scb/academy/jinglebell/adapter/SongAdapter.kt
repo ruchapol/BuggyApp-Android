@@ -15,12 +15,17 @@ class SongAdapter(
     private val onClick: (Song) -> Unit = {}
 ) : RecyclerView.Adapter<SongItemViewHolder>() {
 
+    init {
+        submitList(_songs)
+    }
+
     val songs: List<Song>
         get() = _songs
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SongItemViewHolder(parent)
 
     override fun onBindViewHolder(holder: SongItemViewHolder, position: Int) {
+//        holder.bind(_songs[position], onClick)
         holder.bind(_songs[position], onClick)
     }
 
@@ -28,12 +33,14 @@ class SongAdapter(
         return if (songs.count() == 0) {
             0
         } else {
-            songs.count() + 1
+            songs.count() - 1
         }
     }
 
     fun submitList(list: List<Song>) {
         _songs = list
+
+
         notifyDataSetChanged()
     }
 
